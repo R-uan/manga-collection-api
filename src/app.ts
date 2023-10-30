@@ -1,8 +1,8 @@
 import cors from "cors";
-import book from "./book";
+import book from "./Component/MangaModel";
 import express from "express";
 import mongoose from "mongoose";
-import Controller from "./BookController";
+import Controller from "./Component/MangaController";
 
 const app = express();
 
@@ -17,5 +17,9 @@ app.get("/books/search-:option-:input", async (req, res) => {
     res.json(await Controller.findByTitleOrAuthor({ option: req.params.option, input: req.params.input }));
 });
 
-mongoose.connect("mongodb://127.0.0.1:27017");
+app.post("/books", async (req, res) => {
+    res.json(await Controller.saveOneManga(req.body));
+});
+
+mongoose.connect("mongodb://127.0.0.1:27017/admin-panel");
 app.listen(8080, () => console.log("yepi"));
