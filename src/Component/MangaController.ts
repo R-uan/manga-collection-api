@@ -24,4 +24,8 @@ export default abstract class MangaController {
 
         return await MangaRepository.saveManga({ info, link, stats });
     }
+
+    public static async deleteOneManga(id: string) {
+        return await MangaRepository.deleteManga(id);
+    }
 }

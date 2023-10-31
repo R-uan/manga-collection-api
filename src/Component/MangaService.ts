@@ -12,4 +12,8 @@ export default abstract class MangaRepository {
     public static saveManga(manga: { info: {}; link: {}; stats: {} }) {
         return MangaModel.create(manga);
     }
+
+    public static deleteManga(id: string) {
+        return MangaModel.deleteOne({ _id: id });
+    }
 }
