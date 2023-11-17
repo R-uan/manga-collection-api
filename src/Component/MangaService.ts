@@ -1,3 +1,4 @@
+import { Manga } from "src/Datatypes/_Manga";
 import MangaModel from "./MangaModel";
 
 export default abstract class MangaRepository {
@@ -15,5 +16,9 @@ export default abstract class MangaRepository {
 
     public static deleteManga(id: string) {
         return MangaModel.deleteOne({ _id: id });
+    }
+
+    public static updateManga(id: string, data: Manga) {
+        return MangaModel.findOneAndUpdate({ _id: id }, data);
     }
 }

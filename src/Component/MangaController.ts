@@ -18,7 +18,15 @@ export default abstract class MangaController {
     }
 
     public static async saveOneManga(body: Manga) {
-        const info = new Info(body.title, body.author, body.type, body.year, body.status, body.genre, body.synopse);
+        const info = new Info(
+            body.title,
+            body.author,
+            body.type,
+            body.year,
+            body.status,
+            body.genre,
+            body.synopse
+        );
         const link = new Link(body.cover, body.url);
         const stats = new Stats();
 
@@ -26,6 +34,12 @@ export default abstract class MangaController {
     }
 
     public static async deleteOneManga(id: string) {
+        if (id == "null") return null;
         return await MangaRepository.deleteManga(id);
+    }
+
+    public static async updateManga(id: string, body: Manga) {
+        if (id == "null") return null;
+        return await MangaRepository.updateManga(id, body);
     }
 }
