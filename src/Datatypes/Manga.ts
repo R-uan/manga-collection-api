@@ -1,4 +1,4 @@
-export class Manga {
+class Manga {
     title: string;
     author: string;
     type: string;
@@ -6,7 +6,9 @@ export class Manga {
     status: string;
     genre: string[];
     synopse: string;
-
     cover: string;
     url: string;
 }
+
+const MangaObj = new Manga();
+export { MangaObj, Manga };

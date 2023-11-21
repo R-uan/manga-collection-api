@@ -1,20 +1,20 @@
-import { Manga } from "src/Datatypes/_Manga";
+import { Manga } from "src/Datatypes/Manga";
 import MangaModel from "./MangaModel";
 
-export default abstract class MangaRepository {
+export default abstract class MangaService {
     public static getAll() {
         return MangaModel.find();
     }
 
     public static findByTitle(title: string) {
-        return MangaModel.find({ "info.title": new RegExp(`${title}`, "i") });
+        return MangaModel.find({ title: new RegExp(`${title}`, "i") });
     }
 
     public static findByAuthor(author: string) {
-        return MangaModel.find({ "info.author": new RegExp(`${author}`, "i") });
+        return MangaModel.find({ author: new RegExp(`${author}`, "i") });
     }
 
-    public static saveManga(manga: { info: {}; link: {}; stats: {} }) {
+    public static saveManga(manga: Manga) {
         return MangaModel.create(manga);
     }
 
@@ -23,6 +23,6 @@ export default abstract class MangaRepository {
     }
 
     public static updateManga(id: string, data: any) {
-        return MangaModel.findOneAndUpdate({ _id: id }, data);
+        return MangaModel.findOneAndUpdate({ _id: id }, data, { new: true });
     }
 }
