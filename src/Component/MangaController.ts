@@ -1,4 +1,4 @@
-import { Manga, MangaObj } from "../Datatypes/Manga";
+import { MangaObj } from "../Datatypes/Manga";
 import MangaService from "./MangaService";
 import { Request, Response } from "express";
 import { logger } from "../Util/logger";
@@ -41,7 +41,8 @@ export default abstract class MangaController {
 
     public static async saveOneManga(req: Request, res: Response) {
         try {
-            const body: Manga = req.body;
+            const body = req.body;
+            for (const key in body) if (!body[key]) delete body[key];
             const bodyKeys = Object.keys(body);
             const mangaKeys = Object.keys(MangaObj);
 
@@ -52,7 +53,7 @@ export default abstract class MangaController {
                 logger.error(
                     `POST MANGA - BAD REQUEST - MISSING FIELDS: ${diff.join(", ")} - /mangas`
                 );
-                res.status(400).json({ missing: diff });
+                res.status(400).json({ missing: diff.join(", ") });
             } else {
                 const response = await MangaService.saveManga(body);
                 res.json(response);

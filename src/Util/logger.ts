@@ -11,6 +11,7 @@ const logger = createLogger({
     transports: [
         new transports.Console({ level: "error" }),
         new transports.Console({ level: "info" }),
+        new transports.Console({ level: "debug" }),
     ],
 });
 
